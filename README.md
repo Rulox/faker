@@ -1,5 +1,5 @@
 
-<p align="center"><img src="docs/faker_logo.png" width="250"></p>
+<p align="center"><img src="doc/faker_logo.png" width="250"></p>
 
 # Faker (WIP, do not use this library in production)
 Faker is a Golang library that generates all type of fake data. Including localized data.
@@ -31,8 +31,8 @@ Just basic data from native data types.
 ```go
     var f generator.Faker
     f = f.New(false) 
-	f.Misc.RandomIntBelow(400)   // Int below 400 
-	f.Misc.Md5()                 // Random MD5 hashed string    
-	f.Misc.UnixTime()            // Actual UNIX Timestamp
+    f.Misc.RandomIntBelow(400)   // Int below 400 
+    f.Misc.Md5()                 // Random MD5 hashed string    
+    f.Misc.UnixTime()            // Actual UNIX Timestamp
 	// etc
 ``` 
