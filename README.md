@@ -36,3 +36,6 @@ Just basic data from native data types.
     f.Misc.UnixTime()            // Actual UNIX Timestamp
 	// etc
 ``` 
+
+### License
+This code is free to use under the terms of the MIT license. See LICENSE.md for more information.
