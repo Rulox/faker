@@ -34,7 +34,7 @@ Just basic data from native data types.
     f.Misc.RandomIntBelow(400)   // Int below 400 
     f.Misc.Md5()                 // Random MD5 hashed string    
     f.Misc.UnixTime()            // Actual UNIX Timestamp
-	// etc
+    // etc
 ``` 
 
 ### License

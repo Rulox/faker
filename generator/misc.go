@@ -15,22 +15,18 @@ const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 type MiscGenerator struct {}
 
 func (mg *MiscGenerator) RandomInt() int {
-	rand.Seed(time.Now().UnixNano())
 	return rand.Int()
 }
 
 func (mg *MiscGenerator) RandomFloat32() float32 {
-	rand.Seed(time.Now().UnixNano())
 	return rand.Float32()
 }
 
 func (mg *MiscGenerator) RandomFloat64() float64 {
-	rand.Seed(time.Now().UnixNano())
 	return rand.Float64()
 }
 
 func (mg *MiscGenerator) RandomIntBelow(t int) int {
-	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(t)
 }
 
@@ -42,7 +38,6 @@ func (mg *MiscGenerator) UnixTime() int64 {
 func (mg *MiscGenerator) randomString(s int) []byte {
 	b := make([]byte, mg.RandomIntBelow(s))
 	for i := range b {
-		rand.Seed(time.Now().UnixNano())
 		b[i] = letterBytes[rand.Intn(len(letterBytes))]
 	}
 	return b
