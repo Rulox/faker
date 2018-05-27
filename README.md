@@ -2,6 +2,9 @@
 <p align="center"><img src="doc/faker_logo.png" width="250"></p>
 
 # Faker (WIP, do not use this library in production)
+![quality](https://sonarcloud.io/api/project_badges/measure?project=faker_key&metric=alert_status)
+![Build Status](https://travis-ci.org/Rulox/faker.svg?branch=master)
+
 Faker is a Golang library that generates all type of fake data. Including localized data.
 
 This library is inspired by same libs in other languages like Perl's, ruby's and PHP's Faker.
