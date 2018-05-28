@@ -11,6 +11,15 @@ This library is inspired by same libs in other languages like Perl's, ruby's and
 
 Faker has been built and tested with Go >= 1.10
 
+## Content
+[Installing](#installing)
+[Usage](#usage)
+    - [Misc](doc/misc.md)
+    - [Address](doc/address.md)
+[Locales](#locales)
+    - [Set Locale](#set-your-locale)
+[License](#license)
+
 ### Installing
 Just use go get
 
@@ -20,25 +29,23 @@ Or add the library to your project and use `dep ensure`
 
 ### Usage
 The main struct `generator/Faker` provides all the usability for you in order to create the fake data.
-By default, the data generated has no locale/language set (although some basic English data would be return).
 
 `Faker` would have different number of generators (for Misc data, Addresses, Companies, Phones, etc). 
-#### Create a new Faker
-```go
-    var f generator.Faker
-    f = f.New(false) // False if we don't want the data to be unique
-``` 
- 
-#### Misc Data (no language/locale)
-Just basic data from native data types. 
-```go
-    var f generator.Faker
-    f = f.New(false) 
-    f.Misc.RandomIntBelow(400)   // Int below 400 
-    f.Misc.Md5()                 // Random MD5 hashed string    
-    f.Misc.UnixTime()            // Actual UNIX Timestamp
-    // etc
-``` 
 
+```go
+    var f generator.Faker
+    f.Misc.RandomInt()  // 54
+    f.Address.Street()  // Bedford 
+``` 
+### Locales
+The locales are organized in YAML files called `faker.yml` inside each language folder.
+The default locale is `en_US`. A lot of help to create new locales for languages is needed
+and the format is so easy that anyone (even if you're not a developer) can supply data
+following the format.
+
+#### Set your locale
+WIP
+ 
+ 
 ### License
 This code is free to use under the terms of the MIT license. See LICENSE.md for more information.
