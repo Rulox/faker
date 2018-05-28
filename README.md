@@ -12,13 +12,13 @@ This library is inspired by same libs in other languages like Perl's, ruby's and
 Faker has been built and tested with Go >= 1.10
 
 ## Content
-[Installing](#installing)
-[Usage](#usage)
+- [Installing](#installing)
+- [Usage](#usage)
     - [Misc](doc/misc.md)
     - [Address](doc/address.md)
-[Locales](#locales)
+- [Locales](#locales)
     - [Set Locale](#set-your-locale)
-[License](#license)
+- [License](#license)
 
 ### Installing
 Just use go get
@@ -47,5 +47,5 @@ following the format.
 WIP
  
  
-### License
+## License
 This code is free to use under the terms of the MIT license. See LICENSE.md for more information.
