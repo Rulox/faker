@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-const DefaultLocales = "./generator/locales"
+const DefaultLocales = "./locales"
 const DefaultYamlName = "faker.yml"
 const DefaultDigit = "#"
 
@@ -38,9 +38,9 @@ type Faker struct {
 	// Locale set. Depending on the locale, the generators will return the data in the selected language
 	locale string
 
-	// Default Generators
-
+	// Misc data generator
 	Misc 	MiscGenerator
+	// Address data generator
 	Address AddressGenerator
 }
 

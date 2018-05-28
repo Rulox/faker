@@ -13,9 +13,9 @@ address:
   province: [Álava, Albacete, Alicante, Almería, Asturias, Ávila, Badajoz, Barcelona, Burgos, Cantabria, Castellón, Ciudad Real, Cuenca, Cáceres, Cádiz, Córdoba, Gerona, Granada, Guadalajara, Guipúzcoa, Huelva, Huesca, Islas Baleares, Jaén, La Coruña, La Rioja, Las Palmas, León, Lugo, lérida, Madrid, Murcia, Málaga, Navarra, Orense, Palencia, Pontevedra, Salamanca, Santa Cruz de Tenerife, Segovia, Sevilla, Soria, Tarragona, Teruel, Toledo, Valencia, Valladolid, Vizcaya, Zamora, Zaragoza]
   state: [Andalucía, Aragón, Principado de Asturias, Baleares, Cantabria, Castilla-La Mancha, Castilla y León, Cataluña, Comunidad Valenciana, Extremadura, Galicia, La Rioja, Comunidad de Madrid, Navarra, País Vasco, Región de Murcia, Santa Cruz de Tenerife, Las Palmas de Gran Canaria]
   formatters: # This is only for full Address
-    - "{{street_suffix}} {{street_name}} {{number}} {{secondary_address}} {{zip_code}} {{city}} {{province}} {{state}}"
-    - "{{street_suffix}} {{street_name}} {{number}} {{secondary_address}} {{zip_code}} {{province}} {{state}}"
-    - "{{street_suffix}} {{street_name}} {{number}} {{zip_code}} {{city}} {{province}} {{state}}"
+    - "{{street_suffix}} {{street_name}} {{number}} {{secondary_address}}, {{zip_code}} {{city}} {{province}}, {{state}}"
+    - "{{street_suffix}} {{street_name}} {{number}} {{secondary_address}}, {{zip_code}} {{province}}, {{state}}"
+    - "{{street_suffix}} {{street_name}} {{number}}, {{zip_code}} {{city}} {{province}}, {{state}}"
 company:
   formats:
 person:

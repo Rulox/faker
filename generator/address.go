@@ -15,6 +15,7 @@ type AddressData struct {
 		CountryDefault string   `yaml:"country_default"`
 		Number         []string `yaml:"number"`
 		StreetSuffix   []string `yaml:"street_suffix"`
+		StreetPrefix   []string `yaml:"street_prefix"`
 		StreetName 	   []string `yaml:"street_name"`
 		Secondary	   []string `yaml:"secondary_address"`
 		ZipCode        string   `yaml:"zip"`
@@ -34,6 +35,7 @@ type AddressGenerator struct {
 	// Selected formatter (only if `randomFormatter` is false)
 	selectedFormatter	string
 }
+
 // Supply the formatter with the right data using a locale. By default en_US
 func (ag *AddressGenerator) supplyWithLocale(lc string) error {
 	f, err := filepath.Abs(GetYamlPath(lc))
@@ -62,8 +64,20 @@ func (ag *AddressGenerator) formatFullAddress() string {
 	}
 	var r string
 	elems := strings.Split(f, " ")
-	// TODO work with commas in formatters
+
 	for i, w := range elems {
+		// Be sure there is no special character around the word. If there are, save them
+		// to use them later
+		var suffix string
+		var prefix string
+		if !strings.HasSuffix(w, "}}") {
+			suffix = w[len(w)-1:]
+			w = strings.TrimSuffix(w, suffix)
+		}
+		if !strings.HasPrefix(w, "{{") {
+			prefix = w[0:1]
+			w = strings.TrimPrefix(w, prefix)
+		}
 		switch w {
 		case "{{street_suffix}}":
 			r += ag.StreetSuffix()
@@ -86,6 +100,13 @@ func (ag *AddressGenerator) formatFullAddress() string {
 		}
 
 		if i != len(elems) {
+			// Add pre/su-ffixes to our word
+			if len(suffix) != 0 {
+				r += suffix
+			}
+			if len(prefix) != 0 {
+				r = prefix + r
+			}
 			r += " "
 		}
 	}
@@ -94,37 +115,50 @@ func (ag *AddressGenerator) formatFullAddress() string {
 // Add a custom formatter following the right structure. It can return an error on failure
 //func (ag *AddressGenerator) AddFormatter(f string) error {}
 
+// Get Full address using a formatter
 func (ag *AddressGenerator) Full() string {
 	return ag.formatFullAddress()
 }
+// Get a random City name
 func (ag *AddressGenerator) City() string {
 	return ag.data.Address.City[rand.Intn(len(ag.data.Address.City))]
 }
+// Get a random Country name
 func (ag *AddressGenerator) Country() string {
 	return ag.data.Address.Country[rand.Intn(len(ag.data.Address.Country))]
 }
+// Get a random Country code
 func (ag *AddressGenerator) CountryCode() string {
 	return ag.data.Address.CountryCode
 }
-//func (ag *AddressGenerator) Number() string {}
+// Get a random street suffix
 func (ag *AddressGenerator) StreetSuffix() string {
 	return ag.data.Address.StreetSuffix[rand.Intn(len(ag.data.Address.StreetSuffix))]
 }
+// Get a random street prefix
+func (ag *AddressGenerator) StreetPrefix() string {
+	return ag.data.Address.StreetPrefix[rand.Intn(len(ag.data.Address.StreetPrefix))]
+}
+// Get a random Street name
 func (ag *AddressGenerator) Street() string {
 	return ag.data.Address.StreetName[rand.Intn(len(ag.data.Address.StreetName))]
 }
 func (ag *AddressGenerator) Province() string {
 	return ag.data.Address.Province[rand.Intn(len(ag.data.Address.Province))]
 }
+// Get a random State name
 func (ag *AddressGenerator) State() string {
 	return ag.data.Address.State[rand.Intn(len(ag.data.Address.State))]
 }
+// Get a random secondary address field
 func (ag *AddressGenerator) Secondary() string {
 	return FormatDigits(ag.data.Address.Secondary[rand.Intn(len(ag.data.Address.Secondary))])
 }
+// Get a random number using the formatter
 func (ag *AddressGenerator) Number() string {
 	return FormatDigits(ag.data.Address.Number[rand.Intn(len(ag.data.Address.Number))])
 }
+// Get a random zip code using the digits formatter
 func (ag *AddressGenerator) ZipCode() string {
 	return FormatDigits(ag.data.Address.ZipCode)
 }
