@@ -1,31 +1,14 @@
-package generator
+package faker
 
 import (
 	"fmt"
+	"time"
+
 	"math/rand"
-	"strconv"
+	"github.com/rulox/faker/generator"
 )
 
-const DefaultLocales = "./locales"
-const DefaultYamlName = "faker.yml"
-const DefaultDigit = "#"
-
-func GetYamlPath(lc string) string {
-	return fmt.Sprintf("%s/%s/%s", DefaultLocales, lc, DefaultYamlName)
-}
-
-// Helper function that returns all the appearances of "#" for a random digit 0-9
-func FormatDigits(s string) string {
-	var r string
-	for _, c := range s {
-		if string(c) == DefaultDigit {
-			r += strconv.Itoa(rand.Intn(9))
-		} else {
-			r += string(c)
-		}
-	}
-	return r
-}
+const defaultLocale = "en_US"
 
 // Base struct for all generators.
 type Faker struct {
@@ -39,14 +22,27 @@ type Faker struct {
 	locale string
 
 	// Misc data generator
-	Misc 	MiscGenerator
+	Misc 	generator.MiscGenerator
 	// Address data generator
-	Address AddressGenerator
+	Address generator.AddressGenerator
+}
+
+// Return a new Faker to start working with. It is necessary to use this 'constructor' in order
+// to initialize some variables and to run the default locale `en_US`
+func NewFaker(l string) (f Faker) {
+	rand.Seed(time.Now().Unix())
+	f.locale = l
+	if len(l) == 0 {
+		f.locale = defaultLocale
+	}
+	f.SetLocale(f.locale)
+	return f
 }
 
 // Set locale for all the generators
 func (f *Faker) SetLocale(l string) error {
-	err := f.Address.supplyWithLocale(l)
+	f.locale = l
+	err := f.Address.SetLocale(l)
 	if err != nil {
 		fmt.Println(err)
 		return err

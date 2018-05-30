@@ -26,8 +26,6 @@ type AddressData struct {
 }
 // Generator for Addresses. It can return a fully address within the supported formats or just
 type AddressGenerator struct {
-	// Selected locale
-	locale 				string
 	// Data loaded from YAML file for this locale
 	data 				AddressData
 	// Wether use random formatter for full address all the time or not
@@ -37,7 +35,8 @@ type AddressGenerator struct {
 }
 
 // Supply the formatter with the right data using a locale. By default en_US
-func (ag *AddressGenerator) supplyWithLocale(lc string) error {
+func (ag *AddressGenerator) SetLocale(lc string) error {
+	// FIX use a relative path
 	f, err := filepath.Abs(GetYamlPath(lc))
 	if err != nil {
 		return err
@@ -47,6 +46,7 @@ func (ag *AddressGenerator) supplyWithLocale(lc string) error {
 	if err != nil {
 		return err
 	}
+
 	ad := &AddressData{}
 	err = yaml.Unmarshal(y, &ad)
 	if err != nil {

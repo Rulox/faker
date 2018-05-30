@@ -1,4 +1,4 @@
-package generator
+package faker
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 
 func TestYAMLLoader(t *testing.T) {
 	var f Faker
-	err := f.Address.supplyWithLocale("es_ES")
+	err := f.SetLocale("es_ES")
 	assert.NoError(t, err)
 	assert.Nil(t, err)
 	assert.IsType(t, "", f.Address.City())
