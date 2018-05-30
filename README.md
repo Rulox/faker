@@ -19,6 +19,7 @@ Faker has been built and tested with Go >= 1.10
     - [Address](doc/address.md)
 - [Locales](#locales)
     - [Set Locale](#set-your-locale)
+- [Examples](examples)
 - [License](#license)
 
 ### Installing
@@ -34,7 +35,7 @@ The main struct `generator/Faker` provides all the usability for you in order to
 `Faker` would have different number of generators (for Misc data, Addresses, Companies, Phones, etc). 
 
 ```go
-    var f generator.Faker
+	f := faker.NewFaker("en_US") // Use en_US locale
     f.Misc.RandomInt()  // 54
     f.Address.Street()  // Bedford 
 ``` 
@@ -45,7 +46,21 @@ and the format is so easy that anyone (even if you're not a developer) can suppl
 following the format.
 
 #### Set your locale
-WIP
+Setting a locale is really easy. The locale string is passed in the `NewFaker` function.
+This function will (among other stuff) load the yaml corresponding to the language code
+you choose. Please be careful, use the name of the folder as the locale name `string`.
+```go
+	f := faker.NewFaker("es_ES")
+```
+
+You can also change the locale after having your faker initialized
+```go
+	f := faker.NewFaker("en_GB")
+	// do your stuff here with en_GB set
+	f.SetLocale("es_ES")
+	// Spanish time!
+```
+
  
  
 ## License
