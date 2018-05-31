@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strconv"
 	"math/rand"
+	"path/filepath"
+	"io/ioutil"
 )
 const defaultLocales = "./generator/locales"
 const defaultYamlName = "faker.yml"
@@ -24,4 +26,17 @@ func FormatDigits(s string) string {
 		}
 	}
 	return r
+}
+
+func GetYaml(lc string) ([]byte, error){
+	f, err := filepath.Abs(GetYamlPath(lc))
+	if err != nil {
+		return nil, err
+	}
+
+	y, err := ioutil.ReadFile(f)
+	if err != nil {
+		return nil, err
+	}
+	return y, nil
 }

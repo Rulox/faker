@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/Rulox/faker/generator"
 	"math/rand"
-	"github.com/rulox/faker/generator"
 )
 
 const defaultLocale = "en_US"
@@ -22,9 +22,11 @@ type Faker struct {
 	locale string
 
 	// Misc data generator
-	Misc 	generator.MiscGenerator
+	Misc generator.MiscGenerator
 	// Address data generator
 	Address generator.AddressGenerator
+	// Person data generator
+	Person  generator.PersonGenerator
 }
 
 // Return a new Faker to start working with. It is necessary to use this 'constructor' in order
@@ -43,6 +45,12 @@ func NewFaker(l string) (f Faker) {
 func (f *Faker) SetLocale(l string) error {
 	f.locale = l
 	err := f.Address.SetLocale(l)
+	// TODO change this for an array of errors to avoid repeating code
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	err = f.Person.SetLocale(l)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -54,5 +62,3 @@ func (f *Faker) SetLocale(l string) error {
 func (f *Faker) Clear() {
 	f.used = make(map[string]interface{})
 }
-
-

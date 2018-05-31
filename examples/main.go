@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rulox/faker"
+	"github.com/Rulox/faker"
 	"fmt"
 )
 
@@ -10,4 +10,5 @@ import (
 func main() {
 	f := faker.NewFaker("es_ES")
 	fmt.Println(fmt.Sprintf("Address example: %s", f.Address.Full()))
+	fmt.Println(fmt.Sprintf("Person Example: %s", f.Person.FullName()))
 }

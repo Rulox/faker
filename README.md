@@ -3,8 +3,7 @@
 
 # Faker (WIP, do not use this library in production)
 ![quality](https://sonarcloud.io/api/project_badges/measure?project=faker_key&metric=alert_status)
-![Build Status](https://travis-ci.org/Rulox/faker.svg?branch=master)
-[![GoDoc](https://godoc.org/github.com/Rulox/faker?status.svg)](https://godoc.org/github.com/Rulox/faker)
+[![Build Status](https://travis-ci.org/Rulox/faker.svg?branch=master)](https://travis-ci.org/Rulox/faker)[![GoDoc](https://godoc.org/github.com/Rulox/faker?status.svg)](https://godoc.org/github.com/Rulox/faker)
 
 Faker is a Golang library that generates all type of fake data. Including localized data.
 
@@ -17,9 +16,11 @@ Faker has been built and tested with Go >= 1.10
 - [Usage](#usage)
     - [Misc](doc/misc.md)
     - [Address](doc/address.md)
+    - [Person](doc/person.md)
 - [Locales](#locales)
     - [Set Locale](#set-your-locale)
 - [Examples](examples)
+- [FAQ](#faq)
 - [License](#license)
 
 ### Installing
@@ -60,8 +61,16 @@ You can also change the locale after having your faker initialized
 	f.SetLocale("es_ES")
 	// Spanish time!
 ```
-
- 
- 
+## FAQ
+ - Is the data real?
+   - The data is randomly chosen so no. You may end up with a wrong province/state/zip code combination
+- What about gender? Does the library take care of the right combination?
+   - Not really. There's a plan to add this capability in the future though.
+- What about a CLI or console tool?
+   - Is in the roadmap! Check the project regularly
+- How can I Help?
+   - There's always a missing language or feature. Feel free to open an `issue` or even better, a `pull request` 
+   to help this library growing
+      
 ## License
 This code is free to use under the terms of the MIT license. See LICENSE.md for more information.

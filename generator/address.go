@@ -1,8 +1,6 @@
 package generator
 
 import (
-	"path/filepath"
-	"io/ioutil"
 	"gopkg.in/yaml.v2"
 	"math/rand"
 	"strings"
@@ -25,10 +23,11 @@ type AddressData struct {
 	}
 }
 // Generator for Addresses. It can return a fully address within the supported formats or just
+// the part of the Address needed
 type AddressGenerator struct {
 	// Data loaded from YAML file for this locale
 	data 				AddressData
-	// Wether use random formatter for full address all the time or not
+	// Whether use random formatter for full address all the time or not
 	randomFormatter 	bool
 	// Selected formatter (only if `randomFormatter` is false)
 	selectedFormatter	string
@@ -36,17 +35,10 @@ type AddressGenerator struct {
 
 // Supply the formatter with the right data using a locale. By default en_US
 func (ag *AddressGenerator) SetLocale(lc string) error {
-	// FIX use a relative path
-	f, err := filepath.Abs(GetYamlPath(lc))
+	y, err := GetYaml(lc)
 	if err != nil {
 		return err
 	}
-
-	y, err := ioutil.ReadFile(f)
-	if err != nil {
-		return err
-	}
-
 	ad := &AddressData{}
 	err = yaml.Unmarshal(y, &ad)
 	if err != nil {
