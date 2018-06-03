@@ -15,6 +15,8 @@ Faker has been built and tested with Go >= 1.10
 ## Content
 - [Installing](#installing)
 - [Usage](#usage)
+    - [In code](#in-code)
+- [Generators](#generators)
     - [Misc](doc/misc.md)
     - [Address](doc/address.md)
     - [Person](doc/person.md)
@@ -27,20 +29,24 @@ Faker has been built and tested with Go >= 1.10
 ### Installing
 Just use go get
 
-`go get -u github.com/rulox/faker`
+`go get -u github.com/Rulox/faker`
 
 Or add the library to your project and use `dep ensure`
 
 ### Usage
-The main struct `generator/Faker` provides all the usability for you in order to create the fake data.
+The main struct `generator/Faker` provides all the usability for you in order to create the fake data. 
+It is necessary to use `faker.NewFaker()` function in order to load default values in some variables.
 
-`Faker` would have different number of generators (for Misc data, Addresses, Companies, Phones, etc). 
-
+`Faker` has different type of generators (for Misc data, Addresses, Companies, Phones, etc). 
+#### In code
 ```go
-	f := faker.NewFaker("en_US") // Use en_US locale
+    f := faker.NewFaker("en_US") // Use en_US locale
     f.Misc.RandomInt()  // 54
     f.Address.Street()  // Bedford 
 ``` 
+### Generators
+A faker instance has multiple generators. Go to the [documentation](doc) to check all of them.
+
 ### Locales
 The locales are organized in YAML files called `faker.yml` inside each language folder.
 The default locale is `en_US`. A lot of help to create new locales for languages is needed
