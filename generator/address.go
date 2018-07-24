@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strings"
 )
+// AddressData is the struct for the address YAML data
 type AddressData struct {
 	Address struct {
 		City           []string `yaml:"city"`
@@ -22,15 +23,14 @@ type AddressData struct {
 		Formatters     []string `yaml:"formatters"`
 	}
 }
-// Generator for Addresses. It can return a fully address within the supported formats or just
+// AddressGenerator is the Generator for Addresses. It can return a fully address within the supported formats or just
 // the part of the Address needed
 type AddressGenerator struct {
-	// Data loaded from YAML file for this locale
 	data 				AddressData
 	// Whether use random formatter for full address all the time or not
-	randomFormatter 	bool
+	RandomFormatter 	bool
 	// Selected formatter (only if `randomFormatter` is false)
-	selectedFormatter	string
+	SelectedFormatter	string
 }
 
 // Supply the formatter with the right data using a locale. By default en_US
@@ -50,8 +50,8 @@ func (ag *AddressGenerator) SetLocale(lc string) error {
 
 // Create a full address within the registered formats
 func (ag *AddressGenerator) formatFullAddress() string {
-	f := ag.selectedFormatter
-	if !ag.randomFormatter {
+	f := ag.SelectedFormatter
+	if !ag.RandomFormatter {
 		f = ag.data.Address.Formatters[rand.Intn(len(ag.data.Address.Formatters))]
 	}
 	var r string

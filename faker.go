@@ -27,6 +27,8 @@ type Faker struct {
 	Address generator.AddressGenerator
 	// Person data generator
 	Person  generator.PersonGenerator
+	// Phone data generator
+	Phone  generator.PhoneGenerator
 }
 
 // Return a new Faker to start working with. It is necessary to use this 'constructor' in order
@@ -45,12 +47,17 @@ func NewFaker(l string) (f Faker) {
 func (f *Faker) SetLocale(l string) error {
 	f.locale = l
 	err := f.Address.SetLocale(l)
-	// TODO change this for an array of errors to avoid repeating code
+	// TODO change this for an array of errors to avoid repeating code and return a custom error
 	if err != nil {
 		fmt.Println(err)
 		return err
 	}
 	err = f.Person.SetLocale(l)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	err = f.Phone.SetLocale(l)
 	if err != nil {
 		fmt.Println(err)
 		return err

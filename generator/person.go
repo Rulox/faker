@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"strings"
 )
-
+// PersonData is the struct for the person YAML data
 type PersonData struct {
 	Person struct {
 		FirstName  []string `yaml:"first_name"`
@@ -16,14 +16,13 @@ type PersonData struct {
 	}
 }
 
-// Generator for People.
+// PersonGenerator is the Generator for People.
 type PersonGenerator struct {
-	// Data loaded from YAML file for this locale
 	data              PersonData
 	// Whether use random formatter for full person name all the time or not
-	randomFormatter   bool
-	// Selected formatter (only if `randomFormatter` is false)
-	selectedFormatter string
+	RandomFormatter   bool
+	// SelectedFormatter (only if `randomFormatter` is false)
+	SelectedFormatter string
 }
 
 // Supply the formatter with the right data using a locale. By default en_US
@@ -43,8 +42,8 @@ func (pg *PersonGenerator) SetLocale(lc string) error {
 }
 
 func (pg *PersonGenerator) formatFullName() string {
-	f := pg.selectedFormatter
-	if !pg.randomFormatter {
+	f := pg.SelectedFormatter
+	if !pg.RandomFormatter {
 		f = pg.data.Person.Formatters[rand.Intn(len(pg.data.Person.Formatters))]
 	}
 	var r string
